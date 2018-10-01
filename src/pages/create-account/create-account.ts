@@ -31,7 +31,6 @@ export class CreateAccountPage {
   }
 
   signup() {
-    debugger;
     let data = this.form.value;
     let credentials = {
       email: data.email,

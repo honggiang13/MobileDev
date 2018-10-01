@@ -133,7 +133,6 @@ export class AuthProvider {
       credentials.email,
       credentials.password
     );
-    debugger;
     await this.updateUserData(signedUser);
   }
 
@@ -144,11 +143,14 @@ export class AuthProvider {
       credentials.email,
       credentials.password
     );
-    debugger;
     await this.updateUserData(signupResult);
   }
 
   //// HELPERS ////
+
+  async changePassword(newPass: string): Promise<any> {
+    return await this.afAuth.auth.currentUser.updatePassword(newPass);
+  }
 
   async logout(): Promise<any> {
     return this.afAuth.auth.signOut();
@@ -162,7 +164,6 @@ export class AuthProvider {
   // Current user as boolean Promise. Used in router guards
   async isLoggedIn(): Promise<boolean> {
     const user = await this.getCurrentUser();
-    debugger;
     return !!user;
   }
 }

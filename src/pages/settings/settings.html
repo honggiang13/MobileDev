@@ -5,18 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>settings</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
-<ion-header>
   <ion-navbar>
     <ion-title>
       Settings
@@ -24,72 +12,74 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page4">
-  <ion-list id="settings-list3">
-    <ion-item color="none" id="settings-list-item9">
-      <ion-avatar item-left>
-        <img />
-      </ion-avatar>
-      <h2>
-        Username
-      </h2>
-    </ion-item>
-    <ion-item-divider color="light" id="settings-list-item-divider4">
-      User information
-    </ion-item-divider>
-    <ion-item id="settings-input5">
-      <ion-label>
-        Full name
-      </ion-label>
-      <ion-input type="text" placeholder="The full name of user"></ion-input>
-    </ion-item>
-    <ion-item-divider color="light" id="settings-list-item-divider2">
-      Statistics
-    </ion-item-divider>
-    <ion-item color="none" id="settings-list-item15">
-      Posts
-      <ion-note item-right></ion-note>
-    </ion-item>
-    <ion-item color="none" id="settings-list-item16">
-      Followers
-      <ion-note item-right></ion-note>
-    </ion-item>
-    <ion-item color="none" id="settings-list-item17">
-      Following
-      <ion-note item-right></ion-note>
-    </ion-item>
-    <ion-item-divider color="light" id="settings-list-item-divider3">
-      Notifications
-    </ion-item-divider>
-    <ion-item id="settings-toggle3">
-      <ion-label>
-        New post from following
-      </ion-label>
-      <ion-toggle color="positive" checked="false"></ion-toggle>
-    </ion-item>
-    <ion-item id="settings-toggle5">
-      <ion-label>
-        New like in own post
-      </ion-label>
-      <ion-toggle color="positive" checked="false"></ion-toggle>
-    </ion-item>
-    <ion-item id="settings-select1">
-      <ion-label>
-        Time period
-      </ion-label>
-      <ion-select name="">
-        <ion-option>
-          5 mins
-        </ion-option>
-        <ion-option>
-          10 mins
-        </ion-option>
-        <ion-option>
-          15 mins
-        </ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <button id="settings-button6" ion-button color="assertive" block>
-    Logout
-  </button>
+  <ng-container *ngIf="auth.user | async as user">
+    <ion-list id="settings-list3">
+      <ion-item color="none" id="settings-list-item9" (tap)="openChangePassPage()">
+        <ion-avatar item-left>
+          <img [src]="user.photoURL" />
+        </ion-avatar>
+        <h2>
+          {{user.email}}
+        </h2>
+      </ion-item>
+      <ion-item-divider color="light" id="settings-list-item-divider4">
+        User information
+      </ion-item-divider>
+      <ion-item id="settings-input5" (tap)="openEditPage()">
+        <ion-label>
+          Full name
+        </ion-label>
+        <ion-label>
+          {{user.displayName}}
+        </ion-label>
+      </ion-item>
+      <ion-item-divider color="light" id="settings-list-item-divider2">
+        Statistics
+      </ion-item-divider>
+      <ion-item color="none" id="settings-list-item15">
+        Posts
+        <ion-note item-right>{{ user.postCount || 0 }}</ion-note>
+      </ion-item>
+      <ion-item color="none" id="settings-list-item16">
+        Followers
+        <ion-note item-right>{{ user.followerCount || 0 }}</ion-note>
+      </ion-item>
+      <ion-item color="none" id="settings-list-item17">
+        Following
+        <ion-note item-right>{{ user.followingCount || 0 }}</ion-note>
+      </ion-item>
+      <ion-item-divider color="light" id="settings-list-item-divider3">
+        Notifications
+      </ion-item-divider>
+      <ion-item id="settings-toggle3">
+        <ion-label>
+          New post from following
+        </ion-label>
+        <ion-toggle color="positive" checked="false"></ion-toggle>
+      </ion-item>
+      <ion-item id="settings-toggle5">
+        <ion-label>
+          New like in own post
+        </ion-label>
+        <ion-toggle color="positive" checked="false"></ion-toggle>
+      </ion-item>
+      <ion-item id="settings-select1">
+        <ion-label>
+          Time period
+        </ion-label>
+        <ion-select name="">
+          <ion-option>
+            5 mins
+          </ion-option>
+          <ion-option>
+            10 mins
+          </ion-option>
+          <ion-option>
+            15 mins
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <user-logout></user-logout>
+  </ng-container>
 </ion-content>

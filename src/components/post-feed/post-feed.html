@@ -1,7 +1,8 @@
 <ng-container *ngIf="(auth.user | async) || {} as user">
 
   <ion-card *ngFor="let post of posts | async; trackBy: trackByFn">
-    <img [src]="post.img || 'https://goo.gl/n62NG4'" onError="this.src='https://goo.gl/LJagAi'">
+    <img [src]=" post.img
+    || 'https://goo.gl/n62NG4'" onError=" this.src='https://goo.gl/LJagAi'" (tap)="goPostDetail(post, user.uid)">
     <ion-card-content>
       <p>{{ post.content }}</p>
       <hr>

@@ -1,10 +1,16 @@
-import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
+import { Injectable } from "@angular/core";
+import * as firebase from "firebase/app";
 import {
   AngularFirestore,
   AngularFirestoreCollection
-} from 'angularfire2/firestore';
+} from "angularfire2/firestore";
 
+export interface PostUser {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+}
 
 export interface Post {
   userId: string;
@@ -21,22 +27,27 @@ export class DatabaseProvider {
   private postsRef: AngularFirestoreCollection<Post>;
 
   constructor(private afs: AngularFirestore) {
-    this.postsRef = this.afs.collection('posts');
+    this.postsRef = this.afs.collection("posts");
   }
 
   getRecentPosts() {
-    return this.afs.collection<Post>('posts', ref =>
-      ref.orderBy('createdAt', 'desc').limit(10)
+    return this.afs.collection<Post>("posts", ref =>
+      ref.orderBy("createdAt", "desc").limit(20)
     );
   }
 
   getUserPosts(userId: string) {
-    return this.afs.collection<Post>('posts', ref =>
+    return this.afs.collection<Post>("posts", ref =>
       ref
-        .orderBy('createdAt', 'desc')
-        .where('userId', '==', userId)
-        .limit(10)
+        .orderBy("createdAt", "desc")
+        .where("userId", "==", userId)
     );
+  }
+
+  getUserInfo(userId: string){
+    const userRef = this.afs.doc(`users/${userId}`).ref;
+    debugger;
+    return userRef.get();
   }
 
   createPost(userId: string, data: Post) {
@@ -68,7 +79,7 @@ export class DatabaseProvider {
   //// RELATIONSHIPS ////
 
   getUsers() {
-    return this.afs.collection('users', ref => ref.limit(10)).valueChanges();
+    return this.afs.collection("users", ref => ref.limit(10)).valueChanges();
   }
 
   follow(followerId: string, followedId: string) {
@@ -82,7 +93,7 @@ export class DatabaseProvider {
     };
 
     return this.afs
-      .collection('relationships')
+      .collection("relationships")
       .doc(docId)
       .set(data);
   }
@@ -91,7 +102,7 @@ export class DatabaseProvider {
     const docId = this.concatIds(followerId, followedId);
 
     return this.afs
-      .collection('relationships')
+      .collection("relationships")
       .doc(docId)
       .delete();
   }
@@ -100,7 +111,7 @@ export class DatabaseProvider {
     const docId = this.concatIds(followerId, followedId);
 
     return this.afs
-      .collection('relationships')
+      .collection("relationships")
       .doc(docId)
       .valueChanges();
   }

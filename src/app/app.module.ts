@@ -1,3 +1,4 @@
+import { PostPage } from './../pages/post/post';
 import { CreateAccountPage } from './../pages/create-account/create-account';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,7 +42,8 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
     MyApp,
     TabsPage,
     LoginPage,
-    CreateAccountPage
+    CreateAccountPage,
+    PostPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
     MyApp,
     TabsPage,
     LoginPage,
-    CreateAccountPage
+    CreateAccountPage,
+    PostPage
   ],
   providers: [
     StatusBar,

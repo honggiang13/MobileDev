@@ -1,8 +1,10 @@
+import { PostPage } from './../../pages/post/post';
 import { Component, OnInit, Input } from '@angular/core';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { NavController } from "ionic-angular";
 
 @Component({
   selector: 'post-feed',
@@ -14,7 +16,7 @@ export class PostFeedComponent implements OnInit {
 
   posts: Observable<any[]>;
 
-  constructor(private db: DatabaseProvider, public auth: AuthProvider) { }
+  constructor(private db: DatabaseProvider, public navCtrl: NavController, public auth: AuthProvider) { }
 
   ngOnInit() {
 
@@ -29,4 +31,7 @@ export class PostFeedComponent implements OnInit {
     return post.id;
   }
 
+  goPostDetail(post, userId){
+    this.navCtrl.push(PostPage, {postInfo: post, currentUserId: userId});
+  }
 }
