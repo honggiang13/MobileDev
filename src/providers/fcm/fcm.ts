@@ -70,7 +70,7 @@ export class FcmProvider {
       }
     };
 
-    return devicesRef.doc(token).set(docData).set({device: user.id , name: user.name});
+    return devicesRef.doc(token).set(docData);
   }
 
   async subscribeTo(topic: string) {
