@@ -17,7 +17,6 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
 @NgModule({
     declarations: [
         FacebookLoginComponent,
-        FacebookLoginComponent,
         AnonymousLoginComponent,
         UserLogoutComponent,
         PostFeedComponent,
@@ -34,7 +33,6 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
         IonicModule
     ],
     exports: [
-        FacebookLoginComponent,
         FacebookLoginComponent,
         AnonymousLoginComponent,
         UserLogoutComponent,

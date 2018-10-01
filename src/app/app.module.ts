@@ -29,6 +29,7 @@ const firebaseConfig = {
 import { Firebase } from '@ionic-native/firebase';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from '@ionic-native/camera';
+import { Device } from '@ionic-native/device';
 
 import { ComponentsModule } from '../components/components.module'
 import { DatabaseProvider } from '../providers/database/database';
@@ -73,7 +74,8 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
     Camera,
     FcmProvider,
     AnalyticsProvider,
-    RemoteConfigProvider
+    RemoteConfigProvider,
+    Device
   ]
 })
 export class AppModule {}

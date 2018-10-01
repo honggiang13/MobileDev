@@ -5,6 +5,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { tap } from "rxjs/operators";
 import { of } from "rxjs/observable/of";
 import { AuthProvider } from "../auth/auth";
+import { Device } from '@ionic-native/device';
 
 @Injectable()
 export class FcmProvider {
@@ -12,7 +13,8 @@ export class FcmProvider {
     public firebaseNative: Firebase,
     public afs: AngularFirestore,
     private platform: Platform,
-    private auth: AuthProvider
+    private auth: AuthProvider,
+    private device: Device
   ) {}
 
   async getToken() {
@@ -56,7 +58,8 @@ export class FcmProvider {
 
     const docData = {
       token,
-      userId: user.uid
+      userId: user.uid,
+      device: this.device
     };
 
     return devicesRef.doc(token).set(docData);
