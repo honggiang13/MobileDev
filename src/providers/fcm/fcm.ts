@@ -59,10 +59,18 @@ export class FcmProvider {
     const docData = {
       token,
       userId: user.uid,
-      device: this.device
+      //device: Object.assign({}, this.device)
+      device: {
+        uuid: this.device.uuid,
+        model: this.device.model,
+        platform: this.device.platform,
+        version: this.device.version,
+        manufacturer: this.device.version,
+        serial: this.device.serial
+      }
     };
 
-    return devicesRef.doc(token).set(docData);
+    return devicesRef.doc(token).set(docData).set({device: user.id , name: user.name});
   }
 
   async subscribeTo(topic: string) {
