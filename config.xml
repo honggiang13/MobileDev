@@ -21,6 +21,10 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
+		<config-file parent="/resources" target="./res/values/strings.xml">
+			<string name="fb_app_id">1901026750016808</string>
+			<string name="fb_app_name">Mobile Dev</string>
+		</config-file>
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
