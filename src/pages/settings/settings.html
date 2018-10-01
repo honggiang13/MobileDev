@@ -53,6 +53,12 @@
       </ion-item-divider>
       <ion-item id="settings-toggle3">
         <ion-label>
+        Get Notifications about Unicorns
+        </ion-label>
+        <fcm-topic [user]="user" topic="unicorns"></fcm-topic>
+      </ion-item>
+      <ion-item id="settings-toggle3">
+        <ion-label>
           New post from following
         </ion-label>
         <ion-toggle color="positive" checked="false"></ion-toggle>
