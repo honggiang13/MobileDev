@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { DatabaseProvider } from "../../providers/database/database";
 import { AuthProvider } from "../../providers/auth/auth";
+import { Observable } from "rxjs/Observable";
 
 /**
  * Generated class for the PostPage page.
@@ -17,7 +18,7 @@ import { AuthProvider } from "../../providers/auth/auth";
 })
 export class PostPage {
   public post: any;
-  public postUser: any;
+  public postUser: Observable<any>;
   isFollowing: any;
   currentUserId: any;
 
@@ -29,15 +30,7 @@ export class PostPage {
   ) {
     this.post = this.navParams.get("postInfo");
     this.currentUserId = this.navParams.get("currentUserId");
-  }
-
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.db.getUserInfo(this.post.userId).subscribe(val =>{
-      this.postUser = val;
-    });
-
+    this.postUser = this.db.getUserInfo(this.post.userId);
     this.db.isFollowing(
       this.currentUserId,
       this.post.userId

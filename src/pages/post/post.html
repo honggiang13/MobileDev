@@ -12,12 +12,12 @@
     <div id="post-markdown3" class="show-list-numbers-and-dots">
         <p>{{ post.content }}</p>
     </div>
-    <ion-item color="none" id="post-list-item19">
+    <ion-item color="none" id="post-list-item19" *ngIf="(postUser | async) || {} as userInfo">
       <ion-avatar item-left>
-        <img [src]="postUser.photoURL || 'https://goo.gl/7kz9qG'" onError=" this.src='https://goo.gl/LJagAi'"/>
+        <img [src]="userInfo.photoURL || 'https://goo.gl/7kz9qG'" onError=" this.src='https://goo.gl/LJagAi'"/>
       </ion-avatar>
       <h2>
-        {{postUser.email}}
+        {{userInfo.email}}
       </h2>
     </ion-item>
     <ion-item id="post-toggle4">

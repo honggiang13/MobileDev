@@ -72,6 +72,23 @@ export class ImageUploadComponent {
 
     this.startUpload(base64);
   }
+
+  async getGalleryAndUpload() {
+    const options: CameraOptions = {
+      quality: 70,
+      targetWidth: 500,
+      targetHeight: 500,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation: true
+    };
+
+    const base64 = await this.camera.getPicture(options);
+
+    this.startUpload(base64);
+  }
 }
 
 @Component({

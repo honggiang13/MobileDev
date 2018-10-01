@@ -71,6 +71,9 @@
       },
       "cordova-plugin-statusbar": {},
       "cordova-plugin-firebase": {},
+      "lycwed-cordova-plugin-admob-free": {
+        "GOOGLE_API_VERSION": "11.2.0"
+      },
       "cordova-plugin-camera": {
         "CAMERA_USAGE_DESCRIPTION": "App would like to access the camera",
         "PHOTOLIBRARY_USAGE_DESCRIPTION": "App would like to access the photo library"
