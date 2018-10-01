@@ -1,4 +1,4 @@
-# Mobile Dev
+# Mobile Dev App
 
 An demonstration app using ionic framework and firebase platform, this project targeted at native deployment to iOS and Android platforms.
 
