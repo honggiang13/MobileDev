@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Create Account
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page7">
+  <form (ngSubmit)="signup()" [formGroup]="form">
+    <img src="assets/imgs/logo.png" style="display:block;width:30%;max-width: 200px;height:auto;margin-left:auto;margin-right:auto;" />
+    <div class="spacer" style="width:300px;height:42px;" id="createAccount-spacer6"></div>
+    <ion-list id="createAccount-list7">
+      <ion-item id="createAccount-input6">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input type="email" placeholder="" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item id="createAccount-input7">
+        <ion-label>
+          Password
+        </ion-label>
+        <ion-input type="password" placeholder="" formControlName="password"></ion-input>
+      </ion-item>
+      
+      <ion-item id="createAccount-input8">
+        <ion-label>
+          Full name
+        </ion-label>
+        <ion-input type="text" placeholder=""></ion-input>
+      </ion-item>
+    </ion-list>
+    <button id="createAccount-button11" ion-button color="dark" block type="submit" [disabled]="!form.valid">
+      Create Account
+    </button>
+  </form>
+</ion-content>

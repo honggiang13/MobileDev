@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <anonymous-login></anonymous-login>
+  <div id="login-markdown4" style="text-align:center;" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      or
+    </p>
+  </div>
+  <facebook-login></facebook-login>
+  <button id="login-button10" ion-button full icon-left (tap)="loginWithGoogle()">
+    <ion-icon name="logo-google"></ion-icon>
+    Login with Google
+  </button>
+  <button id="btn-create-account" ion-button clear full (tap)="signup()">
+    Create an account
+  </button>
+</ion-content>
