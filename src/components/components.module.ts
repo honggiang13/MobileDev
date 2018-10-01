@@ -24,9 +24,8 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
         UserRelationshipComponent,
         ImageUploadComponent,
         UploadModal,
-    FcmHandlerComponent,
-    FcmTopicComponent,
-        
+        FcmHandlerComponent,
+        FcmTopicComponent        
     ],
     imports: [
         CommonModule,
@@ -41,9 +40,8 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
         UserRelationshipComponent,
         ImageUploadComponent,
         UploadModal,
-    FcmHandlerComponent,
-    FcmTopicComponent,
-        
+        FcmHandlerComponent,
+        FcmTopicComponent        
     ],
     entryComponents: [
         UploadModal
