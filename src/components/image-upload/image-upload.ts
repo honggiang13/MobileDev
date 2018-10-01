@@ -52,7 +52,7 @@ export class ImageUploadComponent {
     // Listen for the Download URL
     fileRef
       .getDownloadURL()
-      .pipe(tap(url => this.uploadFinished.emit(decodeURIComponent(url)))
+      .pipe(tap(url => this.uploadFinished.emit(decodeURIComponent(url))))
       .subscribe();
   }
 
