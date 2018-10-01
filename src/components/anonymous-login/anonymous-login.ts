@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { AuthProvider } from "../../providers/auth/auth";
-import { NavController } from "ionic-angular";
+import { NavController, ToastController } from "ionic-angular";
 import { LoadingController } from "ionic-angular";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TabsPage } from "../../pages/tabs/tabs";
@@ -17,7 +17,8 @@ export class AnonymousLoginComponent {
     public auth: AuthProvider,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    fb: FormBuilder
+    fb: FormBuilder,
+    public toastCtrl: ToastController
   ) {
     this.loginForm = fb.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -55,6 +56,11 @@ export class AnonymousLoginComponent {
         debugger;
         loader.dismiss();
         this.loginError = error.message;
+        const toast = this.toastCtrl.create({
+          message: error.message,
+          duration: 3000
+        });
+        toast.present();
       }
     );
   }

@@ -1,18 +1,14 @@
 <ng-container *ngIf="isSupportedPlatform; else notSupported">
 
-<button ion-button color="secondary" 
-        *ngIf="!isSubscribed" 
-        (tap)="fcm.subscribeTo(topic)">
+  <button ion-button block *ngIf="!isSubscribed" (tap)="fcm.subscribeTo(topic)">
 
-  Get {{ topic }} notifications
-</button>
+    Get new follower notifications
+  </button>
 
-<button ion-button color="danger" 
-        *ngIf="isSubscribed" 
-        (tap)="fcm.unsubscribeFrom(topic)">
+  <button ion-button color="danger" block *ngIf="isSubscribed" (tap)="fcm.unsubscribeFrom(topic)">
 
-  End {{ topic }} notifications 
-</button>
+    End new follower notifications
+  </button>
 
 </ng-container>
 

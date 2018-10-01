@@ -45,9 +45,7 @@ export class DatabaseProvider {
   }
 
   getUserInfo(userId: string){
-    const userRef = this.afs.doc(`users/${userId}`).ref;
-    debugger;
-    return userRef.get();
+    return this.afs.doc(`users/${userId}`).valueChanges();
   }
 
   createPost(userId: string, data: Post) {

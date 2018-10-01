@@ -48,42 +48,7 @@
         Following
         <ion-note item-right>{{ user.followingCount || 0 }}</ion-note>
       </ion-item>
-      <ion-item-divider color="light" id="settings-list-item-divider3">
-        Notifications
-      </ion-item-divider>
-      <ion-item id="settings-toggle3">
-        <ion-label>
-          New post from following
-        </ion-label>
-        <ion-toggle color="positive" checked="false"></ion-toggle>
-      </ion-item>
-      <ion-item id="settings-toggle5">
-        <ion-label>
-          New like in own post
-        </ion-label>
-        <ion-toggle color="positive" checked="false"></ion-toggle>
-      </ion-item>
-      <ion-item id="settings-select1">
-        <ion-label>
-          Time period
-        </ion-label>
-        <ion-select name="">
-          <ion-option>
-            5 mins
-          </ion-option>
-          <ion-option>
-            10 mins
-          </ion-option>
-          <ion-option>
-            15 mins
-          </ion-option>
-        </ion-select>
-      </ion-item>
     </ion-list>
-    <ion-label>
-      Get Notifications about Unicorns
-    </ion-label>
-    <fcm-topic [user]="user" topic="unicorns"></fcm-topic>
     <user-logout></user-logout>
   </ng-container>
 </ion-content>

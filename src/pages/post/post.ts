@@ -34,12 +34,16 @@ export class PostPage {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.db.getUserInfo(this.post.userId).subscribe(val =>{
+      this.postUser = val;
+    });
+
     this.db.isFollowing(
       this.currentUserId,
       this.post.userId
     ).subscribe(val =>{
       this.isFollowing = val;
-    })
+    });
   }
 
   async ionViewDidLoad() {

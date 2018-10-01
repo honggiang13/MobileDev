@@ -64,7 +64,8 @@ export class ImageUploadComponent {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.CAMERA
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      correctOrientation: true
     };
 
     const base64 = await this.camera.getPicture(options);
