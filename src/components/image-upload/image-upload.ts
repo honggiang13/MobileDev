@@ -28,7 +28,7 @@ export class ImageUploadComponent {
   ) {}
 
   startUpload(file: string) {
-    const path = `${this.userId}/${new Date().getTime()}`;
+    const path = `${this.userId}/_${new Date().getTime()}`;
 
     // The main task
     this.image = "data:image/jpg;base64," + file;
@@ -45,21 +45,15 @@ export class ImageUploadComponent {
         filter(val => val === 100),
         tap(complete => {
           uploadModal.dismiss();
-
-          fileRef.getDownloadURL();
         })
       )
       .subscribe();
 
     // Listen for the Download URL
-    // fileRef
-    //   .getDownloadURL()
-    //   .pipe(tap(url => {
-    //     if(url){
-    //       this.uploadFinished.emit(url)
-    //     }        
-    //   }))
-    //   .subscribe();
+    fileRef
+      .getDownloadURL()
+      .pipe(tap(url => this.uploadFinished.emit(url.replace("%2F_","/_"))))
+      .subscribe();
   }
 
   async captureAndUpload() {
