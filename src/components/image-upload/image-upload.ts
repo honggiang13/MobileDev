@@ -45,15 +45,21 @@ export class ImageUploadComponent {
         filter(val => val === 100),
         tap(complete => {
           uploadModal.dismiss();
+
+          fileRef.getDownloadURL();
         })
       )
       .subscribe();
 
     // Listen for the Download URL
-    fileRef
-      .getDownloadURL()
-      .pipe(tap(url => this.uploadFinished.emit(url.replace(/%2F/gi, "/"))))
-      .subscribe();
+    // fileRef
+    //   .getDownloadURL()
+    //   .pipe(tap(url => {
+    //     if(url){
+    //       this.uploadFinished.emit(url)
+    //     }        
+    //   }))
+    //   .subscribe();
   }
 
   async captureAndUpload() {
