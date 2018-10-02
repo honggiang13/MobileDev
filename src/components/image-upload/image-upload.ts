@@ -28,12 +28,13 @@ export class ImageUploadComponent {
   ) {}
 
   startUpload(file: string) {
-    const path = `${this.userId}/${new Date().getTime()}`;
+    const path = `${this.userId}/_${new Date().getTime()}`;
 
     // The main task
-    this.image = "data:image/jpg;base64," + file;
-    this.task = this.storage.ref(path).putString(this.image, "data_url");
+    this.image = "data:image/jpg;base64," + file;    
     let fileRef = this.storage.ref(path);
+    this.task = fileRef.putString(this.image, "data_url");
+
     // Define and present the modal component
     let uploadModal = this.modalCtrl.create(UploadModal, { task: this.task });
     uploadModal.present();
@@ -50,12 +51,13 @@ export class ImageUploadComponent {
       .subscribe();
 
     // Listen for the Download URL
-    fileRef
-      .getDownloadURL()
-      .pipe(tap(url => this.uploadFinished.emit(
-          url.contains('?') ? url : url + "?alt=media"
-          )))
-      .subscribe();
+    this.task
+      .downloadURL()
+      .subscribe(
+        url => {
+          this.uploadFinished.emit(url);
+        }
+      )
   }
 
   async captureAndUpload() {
