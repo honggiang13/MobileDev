@@ -28,7 +28,7 @@ export class ImageUploadComponent {
   ) {}
 
   startUpload(file: string) {
-    const path = `${this.userId}/_${new Date().getTime()}`;
+    const path = `${this.userId}/${new Date().getTime()}`;
 
     // The main task
     this.image = "data:image/jpg;base64," + file;
@@ -52,7 +52,9 @@ export class ImageUploadComponent {
     // Listen for the Download URL
     fileRef
       .getDownloadURL()
-      .pipe(tap(url => this.uploadFinished.emit(url.replace("%2F_","/_"))))
+      .pipe(tap(url => this.uploadFinished.emit(
+          url.contains('?') ? url : url + "?alt=media"
+          )))
       .subscribe();
   }
 
