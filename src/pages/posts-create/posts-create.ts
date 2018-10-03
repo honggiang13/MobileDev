@@ -28,6 +28,10 @@ export class PostsCreatePage {
 
   async ionViewDidLoad() {
     console.log("ionViewDidLoad PostsCreatePage");
+    this.getLocation();
+  }
+
+  async getLocation() {
     let coordinates = await this.geolocation.getCurrentPosition();
     if (this.platform.is("cordova")) {
       let geoCoder = await this.nativeGeocoder.reverseGeocode(
@@ -35,9 +39,9 @@ export class PostsCreatePage {
         coordinates.coords.longitude
       );
       this.post.location =
-        geoCoder[0].administrativeArea +
+        geoCoder[0].thoroughfare +
         ", " +
-        geoCoder[0].locality +
+        geoCoder[0].administrativeArea +
         ", " +
         geoCoder[0].countryName;
     } else {

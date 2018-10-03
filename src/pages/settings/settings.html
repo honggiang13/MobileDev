@@ -35,26 +35,12 @@
         <ion-icon name="create" item-right></ion-icon>
       </ion-item>
       <ion-item-divider color="light" id="settings-list-item-divider2">
-        Statistics
-      </ion-item-divider>
-      <ion-item color="none" id="settings-list-item15">
-        Posts
-        <ion-note item-right>{{ user.postCount || 0 }}</ion-note>
-      </ion-item>
-      <ion-item color="none" id="settings-list-item16">
-        Followers
-        <ion-note item-right>{{ user.followerCount || 0 }}</ion-note>
-      </ion-item>
-      <ion-item color="none" id="settings-list-item17">
-        Following
-        <ion-note item-right>{{ user.followingCount || 0 }}</ion-note>
-      </ion-item>
-      <ion-item-divider color="light" id="settings-list-item-divider2">
         Categories Notification
       </ion-item-divider>
       <fcm-topic [user]="user"></fcm-topic>
     </ion-list>
-    <button id="settings-changepass" ion-button color="assertive" block (tap)="openChangePassPage()">
+    <button id="settings-changepass" ion-button color="assertive" block
+      (tap)="openChangePassPage()">
       Change password
     </button>
     <user-logout></user-logout>

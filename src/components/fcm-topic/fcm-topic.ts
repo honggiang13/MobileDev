@@ -26,6 +26,7 @@ export class FcmTopicComponent {
   }
 
   updateFcmTopic() {
+    debugger;
     this.fcm.updateSubscribe(this.categories);
   }
 }

@@ -18,16 +18,16 @@
       <ion-input type="text" placeholder="" [(ngModel)]="post.content"></ion-input>
     </ion-item>
     <ion-item color="none" id="takePhoto-list-item41">
-      <ion-icon name="compass" item-left></ion-icon>
+      <ion-icon name="compass" item-left (tap)="getLocation()"></ion-icon>
       {{post.location}}
     </ion-item>
 
     <ion-item>
       <ion-label>Category</ion-label>
       <ion-select [(ngModel)]="post.category">
-        <ion-option value="Fire Emergency">Fire Emergency</ion-option>
-        <ion-option value="Road Closure/Traffic">Road Closure/Traffic</ion-option>
-        <ion-option value="Weather & Disaster">Weather & Disaster</ion-option>
+          <ion-option value="fire_emergency">Fire Emergency</ion-option>
+          <ion-option value="road_closure_traffic">Road Closure/Traffic</ion-option>
+          <ion-option value="weather_disaster">Weather & Disaster</ion-option>
       </ion-select>
     </ion-item>
 

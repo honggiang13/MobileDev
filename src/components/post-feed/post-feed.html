@@ -3,13 +3,12 @@
   <ion-card *ngFor="let post of posts | async; trackBy: trackByFn">
     <img [src]="post.image || post.img
       || 'assets/imgs/no-image.png'"
-      onError="this.src='assets/imgs/no-image.png'"
-      (tap)="goPostDetail(post, user.uid)" height="150">
+      onError="this.src='assets/imgs/no-image.png'" height="150">
     <ion-card-content>
       <p>{{ post.content }}</p>
       <hr>
-      <p>Location: {{ post.category }}</p>
-      <heart-button [userId]="user.uid" [post]="post">Follow</heart-button>
+      <p>Location: {{ post.location }}</p>
+      <p>Category: {{ post.category }}</p>
     </ion-card-content>
   </ion-card>
 

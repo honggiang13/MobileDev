@@ -35,6 +35,7 @@ export class PostPage {
     this.postUser = this.db.getUserInfo(this.post.userId);
     this.auth.getCurrentUser().then(user => {
       this.isFollowing = user.topics[this.post.category];
+      debugger;
     });
   }
 

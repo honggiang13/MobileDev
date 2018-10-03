@@ -102,7 +102,7 @@ export class FcmProvider {
   }
 
   async updateSubscribe(datas: string[]) {
-    let topics: { [key: string]: any };
+    let topics: { [key: string]: any } = {};
     const user = await this.auth.getCurrentUser();
 
     datas.forEach(topic => {
