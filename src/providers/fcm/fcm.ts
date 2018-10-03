@@ -110,9 +110,9 @@ export class FcmProvider {
     });
 
     if (this.platform.is("cordova")) {
-      user.topics.array.forEach(async element => {
+      for (let element of user.topics) {
         await this.firebaseNative.unsubscribe(element);
-      });
+      }
       datas.forEach(async topic => {
         await this.firebaseNative.subscribe(topic);
       });
