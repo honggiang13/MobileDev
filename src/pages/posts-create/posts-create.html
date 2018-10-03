@@ -17,8 +17,8 @@
       </ion-label>
       <ion-input type="text" placeholder="" [(ngModel)]="post.content"></ion-input>
     </ion-item>
-    <ion-item color="none" id="takePhoto-list-item41">
-      <ion-icon name="compass" item-left (tap)="getLocation()"></ion-icon>
+    <ion-item color="none" id="takePhoto-list-item41"  (tap)="getLocation()">
+      <ion-icon name="compass" item-left></ion-icon>
       {{post.location}}
     </ion-item>
 
