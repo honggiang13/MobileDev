@@ -129,11 +129,10 @@ export class AuthProvider {
 
   async signInWithEmail(credentials): Promise<void> {
     console.log("Sign in with email");
-    const signedUser = await this.afAuth.auth.signInWithEmailAndPassword(
+    await this.afAuth.auth.signInWithEmailAndPassword(
       credentials.email,
       credentials.password
     );
-    await this.updateUserData(signedUser);
   }
 
   //// SIGN UP ////

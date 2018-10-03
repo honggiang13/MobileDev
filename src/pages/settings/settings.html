@@ -30,9 +30,9 @@
           Full name
         </ion-label>
         <ion-label>
-          {{user.displayName}}          
-        </ion-label>  
-        <ion-icon name="create" item-right></ion-icon>      
+          {{user.displayName}}
+        </ion-label>
+        <ion-icon name="create" item-right></ion-icon>
       </ion-item>
       <ion-item-divider color="light" id="settings-list-item-divider2">
         Statistics
@@ -49,6 +49,10 @@
         Following
         <ion-note item-right>{{ user.followingCount || 0 }}</ion-note>
       </ion-item>
+      <ion-item-divider color="light" id="settings-list-item-divider2">
+        Categories Notification
+      </ion-item-divider>
+      <fcm-topic [user]="user"></fcm-topic>
     </ion-list>
     <button id="settings-changepass" ion-button color="assertive" block (tap)="openChangePassPage()">
       Change password

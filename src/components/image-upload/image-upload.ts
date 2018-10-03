@@ -14,9 +14,11 @@ import {
   templateUrl: "image-upload.html"
 })
 export class ImageUploadComponent {
-  @Input() userId;
+  @Input()
+  userId;
 
-  @Output() uploadFinished = new EventEmitter();
+  @Output()
+  uploadFinished = new EventEmitter();
 
   task: AngularFireUploadTask;
   image: string;
@@ -28,10 +30,10 @@ export class ImageUploadComponent {
   ) {}
 
   startUpload(file: string) {
-    const path = `${this.userId}/_${new Date().getTime()}`;
+    const path = `${this.userId}/${new Date().getTime()}`;
 
     // The main task
-    this.image = "data:image/jpg;base64," + file;    
+    this.image = "data:image/jpg;base64," + file;
     let fileRef = this.storage.ref(path);
     this.task = fileRef.putString(this.image, "data_url");
 
@@ -51,13 +53,9 @@ export class ImageUploadComponent {
       .subscribe();
 
     // Listen for the Download URL
-    this.task
-      .downloadURL()
-      .subscribe(
-        url => {
-          this.uploadFinished.emit(url);
-        }
-      )
+    this.task.downloadURL().subscribe(url => {
+      this.uploadFinished.emit(url);
+    });
   }
 
   async captureAndUpload() {

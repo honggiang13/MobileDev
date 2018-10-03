@@ -103,4 +103,9 @@
     <allow-navigation href="http://169.254.36.255:8100" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To get location of your post" />
+    </plugin>
+    <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
+    <plugin name="cordova-plugin-nativegeocoder" spec="3.1.2" />
 </widget>

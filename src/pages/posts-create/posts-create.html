@@ -6,24 +6,40 @@
 
 </ion-header>
 
-
 <ion-content padding text-center>
   <ng-container *ngIf="auth.user | async as user">
-    <img [hidden]="!post.img" [src]="post.img">
+    <img [hidden]="!post.image" [src]="post.image">
 
-    <p>Upload an image from your device and add some content to the post</p>
+    <p>Upload an image from your device and choose the category for the post</p>
+    <ion-item id="takePhoto-input4">
+      <ion-label>
+        Caption
+      </ion-label>
+      <ion-input type="text" placeholder="" [(ngModel)]="post.content"></ion-input>
+    </ion-item>
+    <ion-item color="none" id="takePhoto-list-item41">
+      <ion-icon name="compass" item-left></ion-icon>
+      {{post.location}}
+    </ion-item>
 
-    <ion-input floating type="text" placeholder="Post Content" [(ngModel)]="post.content"></ion-input>
-    
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select [(ngModel)]="post.category">
+        <ion-option value="Fire Emergency">Fire Emergency</ion-option>
+        <ion-option value="Road Closure/Traffic">Road Closure/Traffic</ion-option>
+        <ion-option value="Weather & Disaster">Weather & Disaster</ion-option>
+      </ion-select>
+    </ion-item>
+
     <hr>
-    
-    <ion-input floating type="text" placeholder="Paste Img URL or select from device" [(ngModel)]="post.img"></ion-input>
-    
-          
+
+    <ion-input type="text" placeholder="Paste Img URL or select from device"
+      [(ngModel)]="post.image"></ion-input>
+
     <image-upload [userId]="user.uid" (uploadFinished)="updateURL($event)"></image-upload>
-
     <hr>
 
-    <button [disabled]="!post.img || !post.content" ion-button full (tap)="create(user)">Save Post</button>
+    <button [disabled]="!post.image || !post.category" ion-button full
+      (tap)="create(user)">Save Post</button>
   </ng-container>
 </ion-content>

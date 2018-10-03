@@ -1,26 +1,24 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
-export const newUnicornPost = functions.firestore
+export const newCategoryPost = functions.firestore
 
   .document("posts/{postId}")
   .onCreate(async (snap, event) => {
     const post = snap.data();
 
-    const isUnicorn = post.content.toLowerCase().indexOf("unicorn") >= 0;
-
-    if (!isUnicorn) {
+    if (!post.category) {
       return null;
     }
 
     // Notification content
     const payload = {
       notification: {
-        title: "New Post about Unicorns",
-        body: `Read the latest unicorn post!`,
+        title: post.category,
+        body: "Read the latest " + post.category + " post!",
         icon: "https://goo.gl/Fz9nrQ"
       }
     };
 
-    return admin.messaging().sendToTopic("unicorns", payload);
+    return admin.messaging().sendToTopic(post.category, payload);
   });

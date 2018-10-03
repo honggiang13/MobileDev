@@ -1,14 +1,13 @@
 <ng-container *ngIf="isSupportedPlatform; else notSupported">
 
-  <button ion-button block *ngIf="!isSubscribed" (tap)="fcm.subscribeTo(topic)">
-
-    Get new follower notifications
-  </button>
-
-  <button ion-button color="danger" block *ngIf="isSubscribed" (tap)="fcm.unsubscribeFrom(topic)">
-
-    End new follower notifications
-  </button>
+  <ion-item>
+    <ion-label>Categories</ion-label>
+    <ion-select [(ngModel)]="categories" multiple="true" (ionChange)="updateFcmTopic()" >
+      <ion-option value="Fire Emergency">Fire Emergency</ion-option>
+      <ion-option value="Road Closure/Traffic">Road Closure/Traffic</ion-option>
+      <ion-option value="Weather & Disaster">Weather & Disaster</ion-option>
+    </ion-select>
+  </ion-item>
 
 </ng-container>
 

@@ -10,22 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-exports.newUnicornPost = functions.firestore
+exports.newCategoryPost = functions.firestore
     .document("posts/{postId}")
     .onCreate((snap, event) => __awaiter(this, void 0, void 0, function* () {
     const post = snap.data();
-    const isUnicorn = post.content.toLowerCase().indexOf("unicorn") >= 0;
-    if (!isUnicorn) {
+    if (!post.category) {
         return null;
     }
     // Notification content
     const payload = {
         notification: {
-            title: "New Post about Unicorns",
-            body: `Read the latest unicorn post!`,
+            title: post.category,
+            body: "Read the latest " + post.category + " post!",
             icon: "https://goo.gl/Fz9nrQ"
         }
     };
-    return admin.messaging().sendToTopic("unicorns", payload);
+    return admin.messaging().sendToTopic(post.category, payload);
 }));
 //# sourceMappingURL=notifications.js.map

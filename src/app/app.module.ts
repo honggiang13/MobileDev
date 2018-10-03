@@ -36,6 +36,10 @@ import { DatabaseProvider } from '../providers/database/database';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { AnalyticsProvider } from '../providers/analytics/analytics';
 import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
+import { GeolocationProvider } from '../providers/geolocation/geolocation';
+import { GeocoderProvider } from '../providers/geocoder/geocoder';
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 
 @NgModule({
@@ -71,11 +75,15 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
     Firebase,
     Facebook,
     DatabaseProvider,
+    Geolocation,
+    NativeGeocoder,
     Camera,
     FcmProvider,
     AnalyticsProvider,
     RemoteConfigProvider,
-    Device
+    Device,
+    GeolocationProvider,
+    GeocoderProvider
   ]
 })
 export class AppModule {}

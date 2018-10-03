@@ -6,25 +6,25 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page6">
-<ng-container *ngIf="(auth.user | async) || {} as user">
-  <img [src]="post.img || 'https://goo.gl/n62NG4'" onError=" this.src='https://goo.gl/LJagAi'" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <ng-container *ngIf="(auth.user | async) || {} as user">
+    <img [src]="post.img || 'https://goo.gl/n62NG4'" onError=" this.src='https://goo.gl/LJagAi'" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     <div class="spacer" style="width:300px;height:24px;" id="post-spacer5"></div>
     <div id="post-markdown3" class="show-list-numbers-and-dots">
-        <p>{{ post.content }}</p>
+      <p>{{ post.category }}</p>
     </div>
+    <ion-item id="post-toggle4">
+      <ion-label>
+        Follow this Category
+      </ion-label>
+      <ion-toggle color="positive" [(ngModel)]="isFollowing" (ionChange)="updateFollowing()"></ion-toggle>
+    </ion-item>
     <ion-item color="none" id="post-list-item19" *ngIf="(postUser | async) || {} as userInfo">
       <ion-avatar item-left>
-        <img [src]="userInfo.photoURL || 'https://goo.gl/7kz9qG'" onError=" this.src='https://goo.gl/LJagAi'"/>
+        <img [src]="userInfo.photoURL || 'https://goo.gl/7kz9qG'" onError=" this.src='https://goo.gl/LJagAi'" />
       </ion-avatar>
       <h2>
         {{userInfo.email}}
       </h2>
     </ion-item>
-    <ion-item id="post-toggle4">
-      <ion-label>
-        Follow this User
-      </ion-label>
-      <ion-toggle color="positive" [(ngModel)]="isFollowing" (ionChange)="updateFollowing()"></ion-toggle>
-    </ion-item>
-</ng-container>
+  </ng-container>
 </ion-content>

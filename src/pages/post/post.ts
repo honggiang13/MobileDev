@@ -1,3 +1,4 @@
+import { FcmProvider } from "./../../providers/fcm/fcm";
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { DatabaseProvider } from "../../providers/database/database";
@@ -26,16 +27,14 @@ export class PostPage {
     public navCtrl: NavController,
     public db: DatabaseProvider,
     public auth: AuthProvider,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private fcm: FcmProvider
   ) {
     this.post = this.navParams.get("postInfo");
     this.currentUserId = this.navParams.get("currentUserId");
     this.postUser = this.db.getUserInfo(this.post.userId);
-    this.db.isFollowing(
-      this.currentUserId,
-      this.post.userId
-    ).subscribe(val =>{
-      this.isFollowing = val;
+    this.auth.getCurrentUser().then(user => {
+      this.isFollowing = user.topics[this.post.category];
     });
   }
 
@@ -45,9 +44,9 @@ export class PostPage {
 
   async updateFollowing() {
     if (this.isFollowing) {
-      await this.db.follow(this.currentUserId, this.post.userId);
+      await this.fcm.subscribeTo(this.post.category);
     } else {
-      await this.db.unfollow(this.currentUserId, this.post.userId);
+      await this.fcm.unsubscribeFrom(this.post.category);
     }
   }
 }

@@ -5,7 +5,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { tap } from "rxjs/operators";
 import { of } from "rxjs/observable/of";
 import { AuthProvider } from "../auth/auth";
-import { Device } from '@ionic-native/device';
+import { Device } from "@ionic-native/device";
 
 @Injectable()
 export class FcmProvider {
@@ -99,6 +99,28 @@ export class FcmProvider {
       .collection("users")
       .doc(user.uid)
       .set({ topics }, { merge: true });
+  }
+
+  async updateSubscribe(datas: string[]) {
+    let topics: { [key: string]: any };
+    const user = await this.auth.getCurrentUser();
+
+    datas.forEach(topic => {
+      topics[topic] = true;
+    });
+
+    if (this.platform.is("cordova")) {
+      user.topics.array.forEach(async element => {
+        await this.firebaseNative.unsubscribe(element);
+      });
+      datas.forEach(async topic => {
+        await this.firebaseNative.subscribe(topic);
+      });
+    }
+    return this.afs
+      .collection("users")
+      .doc(user.uid)
+      .update({ topics });
   }
 
   // Handle incoming messages

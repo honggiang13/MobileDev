@@ -1,3 +1,4 @@
+import { FcmProvider } from "./../fcm/fcm";
 import { Injectable } from "@angular/core";
 import * as firebase from "firebase/app";
 import {
@@ -10,6 +11,7 @@ export interface PostUser {
   email: string;
   displayName: string;
   photoURL: string;
+  [key: string]: any;
 }
 
 export interface Post {
@@ -17,6 +19,7 @@ export interface Post {
   createdAt: Date;
   image: string;
   content: string;
+  category: string;
   likeCount: number;
   location: string;
   [key: string]: any;
@@ -26,7 +29,7 @@ export interface Post {
 export class DatabaseProvider {
   private postsRef: AngularFirestoreCollection<Post>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private fcm: FcmProvider) {
     this.postsRef = this.afs.collection("posts");
   }
 
@@ -38,14 +41,12 @@ export class DatabaseProvider {
 
   getUserPosts(userId: string) {
     return this.afs.collection<Post>("posts", ref =>
-      ref
-        .orderBy("createdAt", "desc")
-        .where("userId", "==", userId)
+      ref.orderBy("createdAt", "desc").where("userId", "==", userId)
     );
   }
 
-  getUserInfo(userId: string){
-    return this.afs.doc(`users/${userId}`).valueChanges();
+  getUserInfo(userId: string) {
+    return this.afs.doc<any>(`users/${userId}`).valueChanges();
   }
 
   createPost(userId: string, data: Post) {
@@ -80,29 +81,51 @@ export class DatabaseProvider {
     return this.afs.collection("users", ref => ref.limit(10)).valueChanges();
   }
 
-  follow(followerId: string, followedId: string) {
-    const docId = this.concatIds(followerId, followedId);
-    const createdAt = firebase.firestore.FieldValue.serverTimestamp();
+  async follow(userId: string, category: string): Promise<void> {
+    const user = await this.afs
+      .doc<any>(`users/${userId}`)
+      .valueChanges()
+      .toPromise();
 
-    const data = {
-      followerId,
-      followedId,
-      createdAt
-    };
+    const categories = user.categories || {};
+    categories[category] = true;
+
+    this.fcm.subscribeTo(category);
 
     return this.afs
-      .collection("relationships")
-      .doc(docId)
-      .set(data);
+      .collection("users")
+      .doc(userId)
+      .update({ categories });
   }
 
-  unfollow(followerId: string, followedId: string) {
-    const docId = this.concatIds(followerId, followedId);
+  async unfollow(userId: string, category: string): Promise<void> {
+    const user = await this.afs
+      .doc<any>(`users/${userId}`)
+      .valueChanges()
+      .toPromise();
+
+    const categories = user.categories || {};
+    delete categories[category];
+
+    this.fcm.unsubscribeFrom(category);
 
     return this.afs
-      .collection("relationships")
-      .doc(docId)
-      .delete();
+      .collection("users")
+      .doc(userId)
+      .update({ categories });
+  }
+
+  updateCategories(userId: string, datas: string[]) {
+    let categories: { [key: string]: any };
+
+    datas.forEach(category => {
+      categories[category] = true;
+    });
+
+    return this.afs
+      .collection("users")
+      .doc(userId)
+      .update({ categories });
   }
 
   isFollowing(followerId: string, followedId: string) {
