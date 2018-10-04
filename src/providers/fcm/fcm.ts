@@ -105,6 +105,11 @@ export class FcmProvider {
     let topics: { [key: string]: any } = {};
     const user = await this.auth.getCurrentUser();
 
+    await this.afs
+      .collection("users")
+      .doc(user.uid)
+      .set({ topics }, { merge: true });
+
     datas.forEach(topic => {
       topics[topic] = true;
     });
